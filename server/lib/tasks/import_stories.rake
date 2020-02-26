@@ -5,39 +5,55 @@ require 'nokogiri'
 
 namespace :hn do
   desc 'import latest posts from hackernews'
-  task :import_items => :environment do
+  task :import_stories => :environment do
     # Fetch newest 500 stories
     fetch_newest_story_ids.each do |id|
-      unless Story.exists?(id)
-        fetch_item(id)
-        puts "Stories: #{Story.count}"
-      end
+      import_story(id)
     end
 
-    # Walk through items from last story
-    latest_id = Story.last.id
+    exit(0) if is_finished
 
-    while Story.count < 1000
-      latest_id -= 1
-      unless Story.exists?(latest_id)
-        fetch_item(latest_id)
-        puts "Stories: #{Story.count}"
+    oldest_id = Story.last.id
+    
+    while Story.count < 2000
+      oldest_id -= 1
+      unless Story.exists?(oldest_id)
+        import_story(oldest_id)
       end
     end
   end
 end
 
-def fetch_newest_story_ids
-  url = "https://hacker-news.firebaseio.com/v0/newstories.json?print=pretty"
-  request(url)
-end
+def import_story(id)
+  if Story.exists?(id)
+    puts "Already have story: #{id}"
+    return
+  end
 
-def fetch_item(id)
   item = request("https://hacker-news.firebaseio.com/v0/item/#{id}.json?print=pretty")
   return unless item && item["type"] == "story"
 
   story = save_story(item)
   save_story_image(story)
+  puts "Story #{id} added, total count: #{Story.count}"
+end
+
+def is_finished
+  remaining = 1000 - Story.count
+  finished = remaining <= 0
+  
+  if finished
+    puts "Already have #{Story.count} stories persisted. Exiting."
+  end
+  
+  puts "#{remaining} stories remaining, walking through from last id: #{Story.last.id}"
+
+  finished
+end
+
+def fetch_newest_story_ids
+  url = "https://hacker-news.firebaseio.com/v0/newstories.json?print=pretty"
+  request(url)
 end
 
 def save_story(item)

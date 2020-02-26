@@ -43,8 +43,16 @@ const StoryContent = styled(CardContent)`
   }
 `
 
+const TextPreview = styled.pre`
+  font-size: 1rem;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+`
+
 export const StoryPreview = (props) => {
   const url = props.story.image_url || 'https://via.placeholder.com/150';
+  const text = props.story.text && props.story.text.split(' ').slice(0, 30).join(' ') +  '...';
 
   return (
     <StoryCard elevation={0}>
@@ -61,6 +69,7 @@ export const StoryPreview = (props) => {
             {props.story.title}
           </Typography>
         </Button>
+        {text && <TextPreview>{text}</TextPreview>}
       </StoryContent>
     </StoryCard>
   )

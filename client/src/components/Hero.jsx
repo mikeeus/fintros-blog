@@ -5,7 +5,6 @@ import { Typography } from '@material-ui/core';
 import { mq } from 'theme';
 
 const HeroWrapper = styled.div`
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

@@ -13,10 +13,10 @@ export const mq = {
   gtXs: `(min-width: ${breakpoints.xs})`,
   sm: `(min-width: ${breakpoints.xs}) and (max-width: ${breakpoints.sm}) `,
   gtSm: `(min-width: ${breakpoints.sm})`,
-  ltMd: `(max-width: ${breakpoints.md})`,
+  ltMd: `(max-width: ${breakpoints.sm})`,
   md: `(min-width: ${breakpoints.sm}) and (max-width: ${breakpoints.md})`,
   gtMd: `(min-width: ${breakpoints.md})`,
-  ltLg: `(max-width: ${breakpoints.lg})`,
+  ltLg: `(max-width: ${breakpoints.md})`,
   lg: `(min-width: ${breakpoints.md}) and (max-width: ${breakpoints.lg})`,
   gtLg: `(min-width: ${breakpoints.lg})`,
 };
@@ -26,10 +26,7 @@ const appTheme = {
     secondary: {
       main: '#cc835c',
     },
-    background: {
-      default: '#fbf8f5',
-    },
-    type: 'dark',
+    type: 'light',
   },
   typography: {
     fontFamily: 'Poppins, Roboto, Helvetica',

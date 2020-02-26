@@ -11,3 +11,20 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+a {
+  transition: 100ms ease-in-out;
+  border-bottom: 1px solid transparent;
+  color: inherit;
+  text-decoration: none;
+}
+
+a:visited,
+a:active,
+a:focus {
+  color: inherit;
+}
+
+a:hover {
+  border-bottom-color: inherit;
+}

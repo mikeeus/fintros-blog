@@ -12,6 +12,8 @@ const HeroWrapper = styled.div`
   position: relative;
   padding: 6rem 0;
   color: ${props => props.theme.main};
+  margin-bottom: 3rem;
+  margin-top: -100px;
   
   display: flex;
   flex-direction: column;
@@ -21,13 +23,13 @@ const HeroWrapper = styled.div`
     flex-direction: row;
   }
   @media ${mq.md} {
-    height: 120vw;
+    height: 80vw;
   }
   @media ${mq.sm} {
-    height: 120vw;
+    height: 100vw;
   }
   @media ${mq.xs} {
-    height: 170vw;
+    height: 130vw;
   }
 `
 const HeroSection = styled.div`
@@ -38,14 +40,16 @@ const HeroSection = styled.div`
   padding: 2rem;
 `
 
+const Headline = styled(Typography)`
+  @media ${mq.xs} {
+    font-size: 1.5rem;
+  }
+`
 export const Hero = () => {
   return (
     <HeroWrapper>
       <HeroSection>
-        <Typography variant="h1">Fintros - Blog</Typography>
-      </HeroSection>
-      <HeroSection>
-        Right
+        <Headline variant="h1">Fintros</Headline>
       </HeroSection>
     </HeroWrapper>
   )

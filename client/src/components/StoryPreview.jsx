@@ -44,7 +44,7 @@ const StoryContent = styled(CardContent)`
 `
 
 export const StoryPreview = (props) => {
-  const url = props.story.image_url ?  `http://localhost:3001/${props.story.image_url}` : 'https://via.placeholder.com/150';
+  const url = props.story.image_url || 'https://via.placeholder.com/150';
 
   return (
     <StoryCard elevation={0}>

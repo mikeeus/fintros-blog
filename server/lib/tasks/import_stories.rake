@@ -84,15 +84,19 @@ def save_story_image(story)
     image_url = meta && meta['content']
     
     return if image_url.nil?
+  rescue
+    puts "Error requesting image for story: #{story.id} #{story.title}"
+  end
     
+  begin
     image = open(image_url)
     story.image.attach(
       io: image,
       filename: story.id.to_s,
       content_type: image.content_type
     )
-  rescue
-    puts "Error requesting image for story: #{story.id} #{story.title}"
+  rescue => e
+    puts "Error saving image to Google cloud: #{story.id} #{e.backtrace}"
   end
 end
 
